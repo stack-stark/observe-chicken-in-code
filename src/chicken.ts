@@ -1,36 +1,15 @@
-const body = [
-  '/**',
-  '* @code: 选择商品类型',
-  '* @name: 选择的商品类型',
-  ' */',
-  'function huaxia() {',
-  "// 基金代码' ; ",
-  "const code = 'code'; ",
-  "// 基金名称' ; ",
-  "const name = 'name' ; ",
-  "// 当前基金单位净值' ; ",
-  "const netWorth = '210' ; ",
-  "// 日涨幅,单位为百分比' ; ",
-  "const dayGrowth = '210' ; ",
-  "// 最近一周涨幅,单位为百分比' ; ",
-  "const lastWeekGrowth = '210' ; ",
-  "// 最近一个月涨幅,单位为百分比' ; ",
-  "const lastMonthGrowth = '210' ; ",
-  "// 最近三个月涨幅,单位为百分比' ; ",
-  "const lastThreeMonthsGrowth = '210' ; ",
-  "// 最近六个月涨幅,单位为百分比' ; ",
-  "const lastSixMonthsGrowth = '210' ; ",
-  "// 最近一年涨幅,单位为百分比' ; ",
-  "const lastYearGrowth = '210' ; ",
-  "// 当前基金单位净值' ; ",
-  "const netWorth = '210' ; ",
-  "// 今年的涨幅,单位为百分比' ; ",
-  "const thisYearGrowth = '210' ; ",
-  '}',
-]
-const vscode = require('vscode')
-import Axios, { AxiosResponse } from 'axios';
-
+                      /*
+   o                 /' )
+                   /'   (                          ,
+               __/'     )                        .' `;
+o      _.-~~~~'          ``---..__             .'   ;
+ _.--'  b)  stack-stark           ``--...____.'   .'
+(     _.      )).      `-._    2021.6.10         <
+ `\|\|\|\|)-.....___.-     `-.         __...--'-.'.
+   `---......____...---`.___.'----... .'         `.;
+                                    `-`           `*/
+const vscode = require('vscode');
+import Axios from 'axios';
 interface BoardDataType {
   code: string,	
   name: string,	
@@ -48,18 +27,41 @@ interface BoardDataType {
   date: string
 }
 
-/**
- *
- */
+interface FundDataType {
+  code: string,	
+  name: string,	
+  type: string,	
+  netWorth: string,	
+  expectWorth: string,
+  totalWorth: string,	
+  expectGrowth: string,	
+  dayGrowth: string,	
+  lastWeekGrowth: string,	
+  lastMonthGrowth: string,
+  lastThreeMonthsGrowth: string,
+  lastSixMonthsGrowth: string,	
+  lastYearGrowth: string,	
+  buyMin: Number,	
+  buySourceRate: Number,	
+  buyRate: Number,	
+  manager: string,	
+  fundScale: string,	
+  worthDate: string,	
+  expectWorthDate: string
+}
 class Chicken {
+
+  /**
+   * 主方法
+   */
   async commandHandel() {
-    const tpl = await this.createCode();
-    const editor = vscode.editor || vscode.window.activeTextEditor // 选中文件
+    const tpl: string = await this.createCode();
+    const editor = vscode.editor || vscode.window.activeTextEditor; // 选中文件
     editor.edit((editBuilder: any) => {
-      editBuilder.insert(new vscode.Position(1, 0), tpl) // 插入
+      editBuilder.insert(new vscode.Position(1, 0), tpl); // 插入
       setTimeout(() => {
-        editor.document.save()
-      }, 200)
+        editor.document.save();
+      }, 200);
     })
   }
 
@@ -68,13 +70,33 @@ class Chicken {
    * @returns 
    */
   async createCode(): Promise<string> {
-    let codeString = ''
-    // const array =  vscode.workspace.getConfiguration().get('stockArray');
+    let codeString: string = '';
+    const chickenArray: Array<string> = vscode.workspace.getConfiguration().get('chickenArray') || [];
     const array: Array<BoardDataType> = await this.getBoardData();
     for (const it of array) {
-      codeString += this.createBoardString(it)
+      codeString += this.createBoardString(it);
     }
-    return codeString
+    for await (const some of chickenArray) {
+      codeString += await this.getFundDetailByCode(some);
+    }
+    return codeString;
+  }
+
+  setHeader() {
+
+  }
+
+  /**
+   * 根据code获取详情并生成代码 
+   * @param code 
+   * @returns 
+   */
+  async getFundDetailByCode(code: string): Promise<string> {
+    const res: any = await Axios.get(`https://api.doctorxiong.club/v1/fund/detail?code=${code}`);
+    if(res.data && res.data.data) {
+      return this.createString(res.data.data);
+    }
+    return '\n'
   }
 
   /**
@@ -93,8 +115,13 @@ class Chicken {
     return [];
   }
 
+  /**
+   * 拼接大盘数据
+   * @param data 
+   * @returns 
+   */
   createBoardString(data: BoardDataType): string {
-    let str = `/**\n * @code: ${data.code}\n * @name: ${data.name}\n */\nfunction stock${data.code}() { \n 
+    let str = `/**\n * @code: ${data.code}\n * @name: ${data.name}\n */\nfunction stack${data.code}() { \n 
     // 股票代码 
     const code = '${data.code}';\n 
     // 股票名称
@@ -127,26 +154,56 @@ class Chicken {
     return str
   }
 
-
-
-
-
-
-
-
-
-
-
-
-  createString(code: string, name: string): string {
-    let str = `/**\n * @code: ${code}\n * @name: ${name}\n */\nfunction stock${code}() { \n 
+  /**
+   * 拼接基金数据
+   * @param data 
+   * @returns 
+   */
+  createString(data: FundDataType): string {
+    let str = `/**\n * @code: ${data.code}\n * @name: ${data.name}\n */\nfunction stack${data.code}() { \n 
     // 基金代码 
-    const code = '${code}';\n 
+    const code = '${data.code}';\n 
     // 基金名称
-    const name = '${name}';\n
-    }
+    const name = '${data.name}';\n
+    // 基金类型 
+    const type = '${data.type}';\n 
+    // 当前基金单位净值
+    const netWorth = '${data.netWorth}';\n
+    // 当前基金单位净值估算 
+    const expectWorth = '${data.expectWorth}';\n 
+    // 当前基金累计净值
+    const totalWorth = '${data.totalWorth}';\n
+    // 当前基金单位净值估算日涨幅,单位为百分比 
+    const expectGrowth = '${data.expectGrowth}';\n 
+    // 单位净值日涨幅,单位为百分比
+    const dayGrowth = '${data.dayGrowth}';\n
+    // 单位净值周涨幅,单位为百分比 
+    const lastWeekGrowth = '${data.lastWeekGrowth}';\n 
+    // 单位净值月涨幅,单位为百分比
+    const lastMonthGrowth = '${data.lastMonthGrowth}';\n
+    // 单位净值三月涨幅,单位为百分比 
+    const lastThreeMonthsGrowth = '${data.lastThreeMonthsGrowth}';\n 
+    // 单位净值六月涨幅,单位为百分比
+    const lastSixMonthsGrowth = '${data.lastSixMonthsGrowth}';\n
+    // 单位净值年涨幅,单位为百分比 
+    const lastYearGrowth = '${data.lastYearGrowth}';\n 
+    // 起购额度
+    const buyMin = '${data.buyMin}';\n
+    // 原始买入费率,单位为百分比
+    const buySourceRate = '${data.buySourceRate}';\n 
+    // 当前买入费率,单位为百分比
+    const buyRate = '${data.buyRate}';\n
+    // 基金经理 
+    const manager = '${data.manager}';\n 
+    // 基金规模及日期,日期为最后一次规模变动的日期
+    const fundScale = '${data.fundScale}';\n
+    // 净值更新日期,日期格式为yy-MM-dd HH:mm.2019-06-27 15:00代表当天下午3点 
+    const worthDate = '${data.worthDate}';\n 
+    // 净值估算更新日期,,日期格式为yy-MM-dd HH:mm.2019-06-27 15:00代表当天下午3点
+    const expectWorthDate = '${data.expectWorthDate}';\n}
     \r\n`
     return str
   }
+
 }
 module.exports = Chicken

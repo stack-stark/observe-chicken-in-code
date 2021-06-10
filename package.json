@@ -32,8 +32,8 @@
     "keybindings": [
       {
         "command": "code.showChicken",
-        "key": "ctrl+f10",
-        "mac": "cmd+f10",
+        "key": "ctrl+shift+x",
+        "mac": "cmd+shift+x",
         "when": "editorTextFocus"
       }
     ]
