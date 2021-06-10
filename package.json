@@ -2,7 +2,22 @@
   "name": "observe-chicken-in-code",
   "displayName": "码上看鸡",
   "description": "生成js代码,在代码里查看基金情况",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stack-stark/observe-chicken-in-code.git"
+  },
   "version": "1.0.0",
+  "keywords": [
+    "stock",
+    "股票",
+    "fund",
+    "基金",
+    "同花顺",
+    "天天基金",
+    "蚂蚁财富",
+    "vscode"
+  ],
+  "icon": "resources/logo.png",
   "engines": {
     "vscode": "^1.56.0"
   },
