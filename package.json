@@ -29,6 +29,26 @@
     "onCommand:code.showChicken"
   ],
   "main": "./out/extension.js",
+  "configuration": {
+    "properties": {
+      "stack.chickenArray": {
+        "type": "array",
+        "default": [
+          "320007",
+          "008592",
+          "003834",
+          "161725",
+          "002364",
+          "005918",
+          "003745",
+          "004119",
+          "162703",
+          "270002"
+        ],
+        "description": "配置需要生成的基金代码"
+      }
+    }
+  },
   "contributes": {
     "commands": [
       {

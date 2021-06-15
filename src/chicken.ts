@@ -71,7 +71,7 @@ class Chicken {
    */
   async createCode(): Promise<string> {
     let codeString: string = '';
-    const chickenArray: Array<string> = vscode.workspace.getConfiguration().get('chickenArray') || [];
+    const chickenArray: Array<string> = vscode.workspace.getConfiguration().get('stack.chickenArray') || [];
     const array: Array<BoardDataType> = await this.getBoardData();
     for (const it of array) {
       codeString += this.createBoardString(it);
@@ -82,8 +82,12 @@ class Chicken {
     return codeString;
   }
 
-  setHeader() {
-
+  /**
+   * 设置头部,预留
+   * @returns 
+   */
+  private setHeader(): string {
+    return ''
   }
 
   /**
@@ -137,7 +141,7 @@ class Chicken {
     // 开盘后价格变化
     const priceChange = '${data.priceChange}';\n
     // 价格变化,单位为百分比
-    const changePercent = '${data.changePercent}';\n
+    const changePercent = '${data.changePercent}%';\n
     // 开盘截至目前最高价
     const high = '${data.high}';\n
     // 开盘截至目前最低价
@@ -174,25 +178,25 @@ class Chicken {
     // 当前基金累计净值
     const totalWorth = '${data.totalWorth}';\n
     // 当前基金单位净值估算日涨幅,单位为百分比 
-    const expectGrowth = '${data.expectGrowth}';\n 
+    const expectGrowth = '${data.expectGrowth}%';\n 
     // 单位净值日涨幅,单位为百分比
-    const dayGrowth = '${data.dayGrowth}';\n
+    const dayGrowth = '${data.dayGrowth}%';\n
     // 单位净值周涨幅,单位为百分比 
-    const lastWeekGrowth = '${data.lastWeekGrowth}';\n 
+    const lastWeekGrowth = '${data.lastWeekGrowth}%';\n 
     // 单位净值月涨幅,单位为百分比
-    const lastMonthGrowth = '${data.lastMonthGrowth}';\n
+    const lastMonthGrowth = '${data.lastMonthGrowth}%';\n
     // 单位净值三月涨幅,单位为百分比 
-    const lastThreeMonthsGrowth = '${data.lastThreeMonthsGrowth}';\n 
+    const lastThreeMonthsGrowth = '${data.lastThreeMonthsGrowth}%';\n 
     // 单位净值六月涨幅,单位为百分比
-    const lastSixMonthsGrowth = '${data.lastSixMonthsGrowth}';\n
+    const lastSixMonthsGrowth = '${data.lastSixMonthsGrowth}%';\n
     // 单位净值年涨幅,单位为百分比 
-    const lastYearGrowth = '${data.lastYearGrowth}';\n 
+    const lastYearGrowth = '${data.lastYearGrowth}%';\n 
     // 起购额度
     const buyMin = '${data.buyMin}';\n
     // 原始买入费率,单位为百分比
-    const buySourceRate = '${data.buySourceRate}';\n 
+    const buySourceRate = '${data.buySourceRate}%';\n 
     // 当前买入费率,单位为百分比
-    const buyRate = '${data.buyRate}';\n
+    const buyRate = '${data.buyRate}%';\n
     // 基金经理 
     const manager = '${data.manager}';\n 
     // 基金规模及日期,日期为最后一次规模变动的日期
