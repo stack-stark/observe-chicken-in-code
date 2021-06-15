@@ -1,7 +1,7 @@
 {
   "name": "observe-chicken-in-code",
   "displayName": "码上看鸡",
-  "description": "生成js代码,在代码里查看基金情况",
+  "description": "根据设置的基金代码获取当前基金涨跌情况数据,然后生成js代码,这样就可以在代码里查看基金情况",
   "repository": {
     "type": "git",
     "url": "https://github.com/stack-stark/observe-chicken-in-code.git"
