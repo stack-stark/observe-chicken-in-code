@@ -6,12 +6,13 @@
     "type": "git",
     "url": "https://github.com/stack-stark/observe-chicken-in-code.git"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "stack-stark-code",
   "keywords": [
     "stock",
     "股票",
     "fund",
+    "摸鱼",
     "基金",
     "同花顺",
     "天天基金",
@@ -26,7 +27,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:code.showChicken"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
 
@@ -54,6 +55,16 @@
             "270002"
           ],
           "description": "配置需要生成的基金代码"
+        },
+        "stack.chickenSimple": {
+          "type": "boolean",
+          "default": true,
+          "description": "配置生成简约关键信息还是显示完整信息,false则显示完整信息"
+        },
+        "stack.chickenBoard": {
+          "type": "boolean",
+          "default": true,
+          "description": "配置是否生成大盘指数数据情况,false则不显示"
         }
       }
     },

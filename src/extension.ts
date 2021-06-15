@@ -4,7 +4,6 @@ import * as vscode from 'vscode'
 const Chicken = require('./chicken')
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log('Congratulations, your extension "some" is now active!')
 
   let chicken = vscode.commands.registerCommand(
     'code.showChicken',
@@ -16,6 +15,5 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(chicken)
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
 
