@@ -8,11 +8,11 @@ o      _.-~~~~'          ``---..__             .'   ;
  `\|\|\|\|)-.....___.-     `-.         __...--'-.'.
    `---......____...---`.___.'----... .'         `.;
                                     `-`           `*/
-import * as vscode from 'vscode'
-import { TextEditor } from 'vscode'
-const BoardCreateRun = require('./board')
-const FundCreateRun = require('./fund')
-import { window, StatusBarItem, StatusBarAlignment } from 'vscode';
+import * as vscode from 'vscode';
+import { TextEditor } from 'vscode';
+const BoardCreateRun = require('./board');
+const FundCreateRun = require('./fund');
+import { window } from 'vscode';
 class Chicken {
   /**
    * 主方法
@@ -25,7 +25,7 @@ class Chicken {
       editor.edit((editBuilder: any) => {
         editBuilder.insert(new vscode.Position(1, 0), tpl); // 插入
         setTimeout(() => {
-          editor.document.save()
+          editor.document.save();
         }, 200)
       })
     }
@@ -36,17 +36,18 @@ class Chicken {
    * @returns
    */
   async createCode(): Promise<string> {
-    let codeString: string = ''
+    let codeString: string = '';
     const board: boolean =
-      vscode.workspace.getConfiguration().get('stack.chickenBoard') || true
+      vscode.workspace.getConfiguration().get('stack.chickenBoard') || true;
     if (board) {
       // 根据用户配置决定是否显示大盘指数
-      const bordedRun = new BoardCreateRun()
-      codeString += await bordedRun.boardStringMain()
+      const bordedRun = new BoardCreateRun();
+      codeString += await bordedRun.boardStringMain();
     }
-    const fundRun = new FundCreateRun()
-    codeString += await fundRun.fundStringMain()
-    return codeString
+    const fundRun = new FundCreateRun();
+    codeString += await fundRun.fundStringMain();
+    return codeString;
   }
+  
 }
 module.exports = Chicken

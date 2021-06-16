@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
-import Axios from 'axios'
+import * as vscode from 'vscode';
+import Axios from 'axios';
 
 class BoardCreateRun {
 
@@ -32,12 +32,12 @@ class BoardCreateRun {
     const res: any = await Axios.get(
       'https://api.doctorxiong.club/v1/stock/board'
     ).catch((err) => {
-      vscode.window.showInformationMessage(err)
+      vscode.window.showInformationMessage(err);
     })
     if (res.data && res.data.data) {
-      return res.data.data
+      return res.data.data;
     }
-    return []
+    return [];
   }
 
   /**

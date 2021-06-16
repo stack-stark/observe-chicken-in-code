@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
-import Axios from 'axios'
+import * as vscode from 'vscode';
+import Axios from 'axios';
 
 class FundCreateRun {
   /**
