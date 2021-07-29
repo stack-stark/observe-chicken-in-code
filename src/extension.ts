@@ -2,7 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 const Chicken = require('./chicken');
-const AddFund = require('./add-fund');
+const AddFund = require('./addFund');
+const generateFile = require('./generateFile');
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -12,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
   let schicken = vscode.commands.registerCommand(
     'code.showChicken',
     () => {
-      new Chicken().commandHandel();
+      new generateFile().commandHandel();
     }
   );
   
