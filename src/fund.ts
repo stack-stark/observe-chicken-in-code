@@ -122,10 +122,6 @@ class FundCreateRun {
       const totalWorth = '${data.totalWorth}';\n
       // 当前基金单位净值估算日涨幅,单位为百分比 
       const expectGrowth = '${data.expectGrowth}%';\n 
-      // 单位净值日涨幅,单位为百分比
-      const dayGrowth = '${data.dayGrowth}%';\n
-      // 净值更新日期,日期格式为yy-MM-dd HH:mm.2019-06-27 15:00代表当天下午3点 
-      const worthDate = '${data.worthDate}';\n 
       // 净值估算更新日期,,日期格式为yy-MM-dd HH:mm.2019-06-27 15:00代表当天下午3点
       const expectWorthDate = '${data.expectWorthDate}';\n}
       \r\n`
