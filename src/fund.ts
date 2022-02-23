@@ -119,6 +119,7 @@ class FundCreateRun {
       const code = '${data.code}';\n 
       // 基金名称
       const name = '${data.name}';\n
+      // 当前基金累计净值
       const totalWorth = '${data.totalWorth}';\n
       // 当前基金单位净值估算日涨幅,单位为百分比 
       const expectGrowth = '${data.expectGrowth}%';\n 
